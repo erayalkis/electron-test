@@ -1,0 +1,14 @@
+{
+  "name": "electron-test",
+  "version": "1.0.0",
+  "description": "An electron app.",
+  "main": "./JavaScript/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Eray Alkış",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^18.0.2"
+  }
+}
