@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav {
+  width: 100vw;
+  height: 35px;
+  background-color: #2f3241;
+  -webkit-app-region: drag;
+}

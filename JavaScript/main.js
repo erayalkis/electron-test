@@ -1,10 +1,20 @@
 const { app, BrowserWindow } = require("electron");
-const path = require("path");
+try {
+  require("electron-reloader")(module);
+} catch (e) {}
 
 const createWindow = () => {
+  const path = require("path");
+
   const wnd = new BrowserWindow({
     width: 800,
     height: 600,
+    autoHideMenuBar: true,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#2f3241",
+      symbolColor: "#74b1be",
+    },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
