@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let date = null;
+
   const buttons = document.querySelector(".nav-btns").children;
   const timer = document.querySelector(".app-timer");
   const timerButton = document.querySelector(".app-btn");
+  const timerInputsContainer = document.querySelector(".timer-selectors");
+  const timerInputs = timerInputsContainer.children;
 
   const min = buttons[0];
   const max = buttons[1];
@@ -20,10 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   timerButton.addEventListener("click", () => {
-    let date = new Date();
-    date.setMinutes(20);
-    date.setSeconds(0);
+    timer.textContent = "";
+
+    date = date || new Date();
+    date.setHours(0);
+    date.setMinutes(timerInputs[0].value);
+    date.setSeconds(timerInputs[1].value);
+
+    if (timerInputs[0].value == 00 && timerInputs[1].value == 0) {
+      timer.textContent = "Please choose a valid time.";
+      return;
+    }
+
     timer.textContent = `${date.getMinutes()}:${date.getSeconds()}`;
+    timerInputsContainer.classList.add("hidden");
 
     if (timerButton.textContent === "Start") {
       timer.classList.remove("paused");
@@ -33,21 +47,47 @@ document.addEventListener("DOMContentLoaded", () => {
       timerButton.textContent = "Start";
     }
 
-    timerRunning = true;
-    setInterval(() => {
-      if (!isTimerPaused()) tickTimer(date);
-    }, 1000);
+    if (!date) {
+      let timerInterval = setInterval(() => {
+        console.log(isTimerDone(date));
+
+        if (isTimerDone(date)) {
+          timerInputsContainer.classList.remove("hidden");
+          timerButton.textContent = "Start";
+          timer.textContent = "";
+          clearInterval(timerInterval);
+          date = null;
+
+          createNotif(`Time's up! Time for a break!`);
+          return;
+        }
+
+        if (!isTimerPaused() && !isTimerDone(date)) {
+          tickTimer(date);
+        }
+      }, 1000);
+    }
   });
 
   function isTimerPaused() {
-    timer.textContent === "Start";
+    timerButton.textContent === "Start";
+  }
+
+  function isTimerDone(date) {
+    return (
+      date.getHours() == 0 && date.getMinutes() == 0 && date.getSeconds() == 0
+    );
   }
 
   function tickTimer(date) {
     date.setSeconds(date.getSeconds() - 1);
 
-    console.log(`${date.getMinutes()}:${date.getSeconds()}`);
+    // console.log(`${date.getMinutes()}:${date.getSeconds()}`);
 
-    timer.textContent = `${date.getMinutes()}:${date.getSeconds()}`;
+    timer.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  }
+
+  function createNotif(text) {
+    new Notification("Pomodoro", { body: text });
   }
 });

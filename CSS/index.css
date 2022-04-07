@@ -37,10 +37,29 @@ html {
   text-align: center;
   margin-top: 50px;
   color: #8dd5e6;
+  margin-left: 15px;
 }
 
 .app-timer.paused {
   color: rgb(241, 109, 86);
+}
+
+.timer-selectors.hidden {
+  display: none;
+}
+
+.timer-selector {
+  background-color: #292b36;
+  border: 0;
+  color: #74b1be;
+  width: 100px;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.timer-selector:focus {
+  outline: none;
 }
 
 .app-btn {

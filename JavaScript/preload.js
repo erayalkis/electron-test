@@ -5,3 +5,7 @@ contextBridge.exposeInMainWorld("nav", {
   maximize: () => ipcRenderer.send("maximize"),
   close: () => ipcRenderer.send("close"),
 });
+
+contextBridge.exposeInMainWorld("timer", {
+  finish: () => ipcRenderer.send("finish"),
+});
