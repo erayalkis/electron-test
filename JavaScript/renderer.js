@@ -20,22 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   timerButton.addEventListener("click", () => {
+    let date = new Date();
+    date.setMinutes(20);
+    date.setSeconds(0);
+    timer.textContent = `${date.getMinutes()}:${date.getSeconds()}`;
+
     if (timerButton.textContent === "Start") {
       timer.classList.remove("paused");
-
       timerButton.textContent = "Stop";
-      startTimer();
     } else {
+      timer.classList.add("paused");
       timerButton.textContent = "Start";
-      stopTimer();
     }
+
+    timerRunning = true;
+    setInterval(() => {
+      if (!isTimerPaused()) tickTimer(date);
+    }, 1000);
   });
 
-  function startTimer() {
-    timer.textContent = "20:00";
+  function isTimerPaused() {
+    timer.textContent === "Start";
   }
 
-  function stopTimer() {
-    timer.classList.add("paused");
+  function tickTimer(date) {
+    date.setSeconds(date.getSeconds() - 1);
+
+    console.log(`${date.getMinutes()}:${date.getSeconds()}`);
+
+    timer.textContent = `${date.getMinutes()}:${date.getSeconds()}`;
   }
 });
