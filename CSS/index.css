@@ -5,7 +5,38 @@
 
 .app-nav {
   width: 100vw;
-  height: 35px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
   background-color: #2f3241;
   -webkit-app-region: drag;
+}
+
+.nav-btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  -webkit-app-region: no-drag;
+}
+
+.nav-btn {
+  text-align: center;
+  padding: 3px;
+  border: 0;
+  color: #74b1be;
+  background-color: #2f3241;
+  transition-property: color, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  -webkit-app-region: no-drag;
+  width: 40px;
+}
+
+.nav-btn:hover {
+  background-color: #484c5e;
+}
+
+.nav-btn.btn-close:hover {
+  background-color: tomato;
+  color: black;
 }
