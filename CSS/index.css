@@ -3,13 +3,28 @@
   padding: 0;
 }
 
+html {
+  background-color: #292b36;
+}
+
 .app-nav {
   width: 100vw;
   height: 30px;
   display: flex;
+  position: fixed;
+  top: 0;
   justify-content: flex-end;
   background-color: #2f3241;
   -webkit-app-region: drag;
+}
+
+.app-main {
+  height: 100vh;
+
+  color: #8dd5e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btns {
