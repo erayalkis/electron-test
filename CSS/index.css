@@ -3,8 +3,14 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("../Fonts/Roboto-Bold.ttf");
+}
+
 html {
   background-color: #292b36;
+  font-family: "Roboto";
 }
 
 .app-nav {
@@ -19,6 +25,7 @@ html {
 }
 
 .app-main {
+  text-align: center;
   height: 85vh;
   color: #8dd5e6;
   display: flex;
@@ -38,11 +45,13 @@ html {
   font-size: 2em;
   background-color: #2f3241;
   border: 0;
-  transition-property: transform, box-shadow;
+  transition-property: transform, box-shadow, margin-top;
   transition-duration: 200ms;
   transition-timing-function: ease-out;
   color: #8dd5e6;
   cursor: pointer;
+  margin-top: 5px;
+  border-radius: 5px;
 }
 
 .app-btn:hover {
@@ -53,7 +62,6 @@ html {
 }
 
 .app-btn:active {
-  box-shadow: 0px 0px 5px #8dd5e6 inset;
   transform: scale(1);
 }
 
