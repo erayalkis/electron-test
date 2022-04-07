@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 try {
   require("electron-reloader")(module);
 } catch (e) {}
@@ -15,7 +15,21 @@ const createWindow = () => {
     },
   });
 
+  ipcMain.on("minimize", (event) => {
+    wnd.minimize();
+  });
+
+  ipcMain.on("maximize", (event) => {
+    wnd.isMaximized() ? wnd.unmaximize() : wnd.maximize();
+  });
+
+  ipcMain.on("close", (event) => {
+    wnd.destroy();
+  });
+
   wnd.loadFile("./HTML/index.html");
+
+  wnd.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
