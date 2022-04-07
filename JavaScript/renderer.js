@@ -26,31 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
   timerButton.addEventListener("click", () => {
     timer.textContent = "";
 
-    date = date || new Date();
-    date.setHours(0);
-    date.setMinutes(timerInputs[0].value);
-    date.setSeconds(timerInputs[1].value);
-
-    if (timerInputs[0].value == 00 && timerInputs[1].value == 0) {
-      timer.textContent = "Please choose a valid time.";
-      return;
-    }
-
-    timer.textContent = `${date.getMinutes()}:${date.getSeconds()}`;
-    timerInputsContainer.classList.add("hidden");
-
-    if (timerButton.textContent === "Start") {
-      timer.classList.remove("paused");
-      timerButton.textContent = "Stop";
-    } else {
-      timer.classList.add("paused");
-      timerButton.textContent = "Start";
-    }
-
     if (!date) {
-      let timerInterval = setInterval(() => {
-        console.log(isTimerDone(date));
+      date = new Date();
+      date.setHours(0);
+      date.setMinutes(timerInputs[0].value);
+      date.setSeconds(timerInputs[1].value);
 
+      let timerInterval = setInterval(() => {
         if (isTimerDone(date)) {
           timerInputsContainer.classList.remove("hidden");
           timerButton.textContent = "Start";
@@ -67,10 +49,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }, 1000);
     }
+
+    if (timerInputs[0].value == 00 && timerInputs[1].value == 0) {
+      timer.textContent = "Please choose a valid time.";
+      return;
+    }
+
+    if (timerButton.textContent === "Start") {
+      timer.classList.remove("paused");
+      timerButton.textContent = "Stop";
+    } else {
+      timer.classList.add("paused");
+      timerButton.textContent = "Start";
+    }
+
+    timer.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    timerInputsContainer.classList.add("hidden");
   });
 
   function isTimerPaused() {
-    timerButton.textContent === "Start";
+    return timerButton.textContent == "Start";
   }
 
   function isTimerDone(date) {
@@ -81,9 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function tickTimer(date) {
     date.setSeconds(date.getSeconds() - 1);
-
-    // console.log(`${date.getMinutes()}:${date.getSeconds()}`);
-
     timer.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   }
 
