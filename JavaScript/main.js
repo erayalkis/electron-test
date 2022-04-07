@@ -28,8 +28,6 @@ const createWindow = () => {
   });
 
   wnd.loadFile("./HTML/index.html");
-
-  wnd.webContents.openDevTools();
 };
 
 app.whenReady().then(() => {
