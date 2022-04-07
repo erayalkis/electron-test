@@ -27,6 +27,9 @@ html {
   align-items: center;
 }
 
+.app-btn {
+}
+
 .nav-btns {
   display: flex;
   justify-content: space-between;
